@@ -1,6 +1,10 @@
 #  Creating Custom XCGrapher plugins
 
-⚠️⚠️ Work In Progress! ⚠️⚠️
+Here's how you can use Swift to write a dylib plugin for [xcgrapher](https://github.com/maxchuquimia/xcgrapher).
+
+## Setup
+
+#### Create a Swift Package that exposes the plugin as a dynamic library
 
 ```swift
 let package = Package(
@@ -9,7 +13,7 @@ let package = Package(
         .library(name: "MyPlugin", type: .dynamic, targets: ["MyPlugin"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/maxchuquimia/XCGrapherPluginSupport.git", from: "0.0.1"),
+        .package(url: "https://github.com/maxchuquimia/XCGrapherPluginSupport.git", from: "0.0.5"),
     ],
     targets: [
         .target(
@@ -21,42 +25,39 @@ let package = Package(
     ]
 )
 ```
+#### Subclass XCGrapherPlugin
 
 ```swift
 import XCGrapherPluginSupport
 
 class MyPlugin: XCGrapherPlugin {
-
-    // Conform to XCGrapherPlugin
     
 }
 ```
 
-Somewhere in your library, 
+#### Create a function that XCGrapher can call to create an instance of your plugin
+This uses the `@_cdecl` attribute to force the compiler to use the symbol name `makeXCGrapherPlugin`. This snippet needs to be copied somewhere in your library with only `MyPlugin` changed to the name of your  `XCGrapherPlugin` subclass.
 ```swift
-import XCGrapherPluginSupport
-
-@_cdecl("createXCGrapherPlugin")
-public func createXCGrapherPlugin() -> UnsafeMutableRawPointer {
-    Unmanaged.passRetained(MyPluginBuilder()).toOpaque()
-}
-
-final class MyPluginBuilder: XCGrapherPluginBuilder {
-
-    override func build() -> XCGrapherPlugin {
-        MyPlugin()
-    }
-    
+@_cdecl("makeXCGrapherPlugin")
+public func makeXCGrapherPlugin() -> UnsafeMutableRawPointer {
+    Unmanaged.passRetained(MyPlugin()).toOpaque()
 }
 ```
+## Drawing Arrows
 
-Build your plugin
+Override functions in the subclass - TODO: add mooore info
+
+
+## Building and running
+
+Build your plugin from the command line:
 ```bash
 swift build -c release --disable-sandbox
 ```
+This will create your dylib at the path `.build/release/libMyPlugin.dylib`
 
-Run `xcgrapher` and use your plugin
+Now you can run `xcgrapher` with the `--plugin` option and tell it to use your newly built dylib to process each file!
 
-```
-xcgrapher --project .. --target .. --spm .. --plugin /path/to/libMyPlugin.dylib # Find the path inside the .build/release directory 
+```bash
+xcgrapher --project .. --target .. --spm .. --plugin .build/release/libMyPlugin.dylib
 ```
