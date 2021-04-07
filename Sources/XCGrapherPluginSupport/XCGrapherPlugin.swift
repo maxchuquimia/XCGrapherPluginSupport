@@ -2,7 +2,7 @@
 import Foundation
 
 /// An interface of a dynamically loadable `xcgrapher` plugin
-public protocol XCGrapherPlugin {
+public protocol XCGrapherPlugin: AnyObject {
 
     // The objects produced by the processing functions can be anything and will be returned in the makeEdges function.
     // Using a generic type here overcomplicates plugin loading and doesn't allow use of multiple types.
