@@ -12,18 +12,18 @@ open class XCGrapherPlugin {
     required public init() { }
 
     /// Produces a list of graph nodes based on the contents of a source file.
-    public func process(file: XCGrapherFile) throws -> [Any] {
+    open func process(file: XCGrapherFile) throws -> [Any] {
         []
     }
 
     /// Produces a list of graph nodes based on an `import X` line.
-    public func process(library: XCGrapherImport) throws -> [Any] {
+    open func process(library: XCGrapherImport) throws -> [Any] {
         []
     }
 
     /// Produces a list of `XCGrapherEdge` (arrows) from the results of `process(file:)` and `process(library:)`.
     /// Duplicate `XCGrapherEdge`s will automatically be discarded.
-    public func makeEdges(from nodes: [Any]) throws -> [XCGrapherEdge] {
+    open func makeEdges(from nodes: [Any]) throws -> [XCGrapherEdge] {
         []
     }
 
