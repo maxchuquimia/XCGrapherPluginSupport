@@ -9,19 +9,21 @@ open class XCGrapherPlugin {
     // But, you can imagine the following is true:
     // associatedtype Any
 
+    required public init() { }
+
     /// Produces a list of graph nodes based on the contents of a source file.
-    func process(file: XCGrapherFile) throws -> [Any] {
+    public func process(file: XCGrapherFile) throws -> [Any] {
         []
     }
 
     /// Produces a list of graph nodes based on an `import X` line.
-    func process(library: XCGrapherImport) throws -> [Any] {
+    public func process(library: XCGrapherImport) throws -> [Any] {
         []
     }
 
     /// Produces a list of `XCGrapherEdge` (arrows) from the results of `process(file:)` and `process(library:)`.
     /// Duplicate `XCGrapherEdge`s will automatically be discarded.
-    func makeEdges(from nodes: [Any]) throws -> [XCGrapherEdge] {
+    public func makeEdges(from nodes: [Any]) throws -> [XCGrapherEdge] {
         []
     }
 
