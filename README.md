@@ -30,7 +30,7 @@ let package = Package(
 ```swift
 import XCGrapherPluginSupport
 
-class MyPlugin: XCGrapherPlugin {
+public class MyPlugin: XCGrapherPlugin {
     // ...
 }
 ```
@@ -58,7 +58,7 @@ public override func process(file: XCGrapherFile) throws -> [Any] {
     // ...
 }
 ```
-This function is called once for every source file in your project and once for every source file in your Swift Package dependencies (if `--spm` is passed to `xcgrapher`). The model `XCGrapherFile` contains convenient about the source file that you can then parse in your own way (see _[XCGrapherFile.swift](https://github.com/maxchuquimia/XCGrapherPluginSupport/tree/master/Sources/XCGrapherPluginSupport/XCGrapherFile.swift))_.
+This function is called once for every source file in your project and once for every source file in your Swift Package dependencies (if `--spm` is passed to `xcgrapher`). The model `XCGrapherFile` contains convenient info about the source file that you can then parse in your own way (see _[XCGrapherFile.swift](https://github.com/maxchuquimia/XCGrapherPluginSupport/tree/master/Sources/XCGrapherPluginSupport/XCGrapherFile.swift))_.
 
 #### process(library:)
 ```swift
@@ -67,7 +67,7 @@ public override func process(library: XCGrapherImport) throws -> [Any] {
 }
 ```
 
-This function is called once for every `import SomeLibrary` line in your projects (depending on the flags passed to `xcgrapher`). `SomeLibrary` is represented by the `XCGrapherImport` model. See _[XCGrapherImport.swift](https://github.com/maxchuquimia/XCGrapherPluginSupport/tree/master/Sources/XCGrapherPluginSupport/XCGrapherImport.swift))_ for available parameters.
+This function is called once for every `import SomeLibrary` line in your projects (depending on the flags passed to `xcgrapher`). `SomeLibrary` is represented by the `XCGrapherImport` model. See _[XCGrapherImport.swift](https://github.com/maxchuquimia/XCGrapherPluginSupport/tree/master/Sources/XCGrapherPluginSupport/XCGrapherImport.swift)_ for available parameters.
 
 
 ### Drawing Arrows
