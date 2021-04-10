@@ -5,7 +5,7 @@ import Foundation
 public struct XCGrapherFile {
 
     /// The origin of the file.
-    public enum Source {
+    public enum Origin {
         /// The file originated from the main --target of the xcgrapher executable.
         case target(name: String)
 
@@ -23,13 +23,13 @@ public struct XCGrapherFile {
     public let fileContents: String
 
     /// The origin of the file.
-    public let source: Source
+    public let origin: Origin
 
-    public init(filename: String, filepath: String, fileContents: String, source: Source) {
+    public init(filename: String, filepath: String, fileContents: String, origin: Origin) {
         self.filename = filename
         self.filepath = filepath
         self.fileContents = fileContents
-        self.source = source
+        self.origin = origin
     }
 
 }

@@ -1,8 +1,8 @@
 
 import Foundation
 
-/// Defines an "edge" (arrow) in the output graph.
-public struct XCGrapherEdge: Hashable {
+/// Defines a GraphViz "edge" (arrow) in the output graph.
+public struct XCGrapherArrow: Hashable {
 
     /// The name of the graph node that the arrow should originate from.
     public let origin: String
@@ -13,7 +13,7 @@ public struct XCGrapherEdge: Hashable {
     /// The color of the arrow, e.g. `#FF0000`
     public let color: String
 
-    public init(origin: String, destination: String, color: String) {
+    public init(origin: String, destination: String, color: String = "#000000") {
         self.origin = origin
         self.destination = destination
         self.color = color

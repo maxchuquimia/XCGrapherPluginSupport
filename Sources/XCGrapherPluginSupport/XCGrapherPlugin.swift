@@ -4,7 +4,7 @@ import Foundation
 /// An interface of a dynamically loadable `xcgrapher` plugin
 open class XCGrapherPlugin {
 
-    // The objects produced by the processing functions can be anything and will be returned in the makeEdges function.
+    // The objects produced by the processing functions can be anything and will be returned in the makeArrows(from:) function.
     // Using a generic type here overcomplicates plugin loading and doesn't allow use of multiple types.
     // But, you can imagine the following is true:
     // associatedtype Any
@@ -21,9 +21,9 @@ open class XCGrapherPlugin {
         []
     }
 
-    /// Produces a list of `XCGrapherEdge` (arrows) from the results of `process(file:)` and `process(library:)`.
-    /// Duplicate `XCGrapherEdge`s will automatically be discarded.
-    open func makeEdges(from nodes: [Any]) throws -> [XCGrapherEdge] {
+    /// Produces a list of `XCGrapherArrow` from the results of `process(file:)` and `process(library:)`.
+    /// Duplicate `XCGrapherArrow`s will automatically be discarded.
+    open func makeArrows(from processResults: [Any]) throws -> [XCGrapherArrow] {
         []
     }
 
